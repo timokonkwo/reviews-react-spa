@@ -7,25 +7,33 @@ const Review = () => {
 
 	const { name, job, image, text } = people[index];
 
-  const checkNumber = number => {
-    if (number > people.length - 1){
-      return 0
-    }
-    
-    if (number < 0){
-      return people.length - 1
-    }
+	const checkNumber = (number) => {
+		if (number > people.length - 1) {
+			return 0;
+		}
 
-    return number
-  }
+		if (number < 0) {
+			return people.length - 1;
+		}
 
-  const nextPerson = () => {
-    setIndex(prev => checkNumber(prev + 1))
-  }
+		return number;
+	};
 
-  const prevPerson = () => {
-    setIndex(prev => checkNumber(prev - 1))
-  }
+	const nextPerson = () => {
+		setIndex((prev) => checkNumber(prev + 1));
+	};
+
+	const prevPerson = () => {
+		setIndex((prev) => checkNumber(prev - 1));
+	};
+
+	const randomPerson = () => {
+		let randomNumber = Math.ceil(Math.random() * people.length);
+
+		randomNumber === index ? (randomNumber += 1) : randomNumber;
+
+    setIndex(checkNumber(randomNumber))
+	};
 
 	return (
 		<article className="review">
@@ -49,7 +57,9 @@ const Review = () => {
 					<FaChevronRight />
 				</button>
 			</div>
-			<button className="random-btn">surprise me</button>
+			<button onClick={randomPerson} className="random-btn">
+				surprise me
+			</button>
 		</article>
 	);
 };
