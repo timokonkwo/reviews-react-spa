@@ -7,6 +7,26 @@ const Review = () => {
 
 	const { name, job, image, text } = people[index];
 
+  const checkNumber = number => {
+    if (number > people.length - 1){
+      return 0
+    }
+    
+    if (number < 0){
+      return people.length - 1
+    }
+
+    return number
+  }
+
+  const nextPerson = () => {
+    setIndex(prev => checkNumber(prev + 1))
+  }
+
+  const prevPerson = () => {
+    setIndex(prev => checkNumber(prev - 1))
+  }
+
 	return (
 		<article className="review">
 			<div className="img-container">
@@ -16,21 +36,20 @@ const Review = () => {
 				</span>
 			</div>
 
-      <h4 className="author">{name}</h4>
-      <p className="job">{job}</p>
-      <p className="info">{text}</p>
+			<h4 className="author">{name}</h4>
+			<p className="job">{job}</p>
+			<p className="info">{text}</p>
 
-      <div className="button-container">
-        <button className="prev-btn">
-          <FaChevronLeft/>
-        </button>
+			<div className="button-container">
+				<button className="prev-btn" onClick={prevPerson}>
+					<FaChevronLeft />
+				</button>
 
-        <button className="next-btn">
-          <FaChevronRight/>
-        </button>
-
-        <button className="random-btn">surprise me</button>
-      </div>
+				<button className="next-btn" onClick={nextPerson}>
+					<FaChevronRight />
+				</button>
+			</div>
+			<button className="random-btn">surprise me</button>
 		</article>
 	);
 };
